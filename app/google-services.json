@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "969804956786",
+    "firebase_url": "https://ctiteamsemaforo.firebaseio.com",
+    "project_id": "ctiteamsemaforo",
+    "storage_bucket": "ctiteamsemaforo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:969804956786:android:490fb4d668580b1d",
+        "android_client_info": {
+          "package_name": "br.com.cti.ctiteams"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "969804956786-5pcpfq24kibol1b4r001olqjj5faot74.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.cti.ctiteams",
+            "certificate_hash": "d7b7f951e2f4137eabf5f8a5b908c8488f2374d8"
+          }
+        },
+        {
+          "client_id": "969804956786-u1m6qvnh19hdtrbpvn808u9loe0vlcm0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjj94NB_a5OQ4AXMfvA1wP59xdHdGBP20"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "969804956786-u1m6qvnh19hdtrbpvn808u9loe0vlcm0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
