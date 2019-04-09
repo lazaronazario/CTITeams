@@ -1,4 +1,4 @@
-package br.com.cti.ctiteams.firebase;
+package util;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -7,7 +7,7 @@ import android.widget.Toast;
 
 import static android.content.Context.CONNECTIVITY_SERVICE;
 
-public class util {
+public class Util {
 
 
 
