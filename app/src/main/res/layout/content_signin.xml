@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingTop="10dp"
+    android:background="@color/backgroundColor">
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:gravity="center">
+
+            <com.ornach.magicicon.IconButton
+                android:id="@+id/btn_ic_fb"
+                android:onClick="btn_fb"
+                app:mi_typeface="font_awesome"
+                app:mi_fontText="&#xf09a;"
+                app:mi_iconColor="#4D6EB4"
+                style="@style/AppTheme.Icon" />
+
+            <com.ornach.magicicon.IconButton
+                android:id="@+id/btn_ic_google"
+                android:onClick="btn_google"
+                app:mi_typeface="font_awesome"
+                app:mi_fontText="&#xf0d5;"
+                app:mi_iconColor="#DC0B00"
+                style="@style/AppTheme.Icon"/>
+
+        </LinearLayout>
+    </HorizontalScrollView>
+    <LinearLayout
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+        <View
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="1dp"
+            android:background="#BBB"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ou"
+            android:paddingLeft="10dp"
+            android:paddingStart="10dp"
+            android:paddingRight="10dp"
+            android:paddingEnd="10dp"
+            />
+        <View
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="1dp"
+            android:background="#BBB"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="30dp"
+        android:paddingStart="30dp"
+        android:paddingEnd="30dp"
+        android:paddingRight="30dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center">
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/AppTheme.TextInputLayout">
+
+            <EditText
+                android:id="@+id/input_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email"
+                style="@style/AppTheme.EditText"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/AppTheme.TextInputLayout">
+
+            <EditText
+                android:id="@+id/input_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Senha"
+                android:inputType="textPassword"
+                style="@style/AppTheme.EditText"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+
+        <com.ornach.nobobutton.NoboButton
+            android:id="@+id/btn_signin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:nb_radius="25dp"
+            app:nb_backgroundColor="#08f94c"
+            android:onClick="btn_entra"
+            app:nb_text="Entrar"
+            app:nb_textColor="#FFF"
+            android:layout_marginTop="20dp"
+            android:padding="10dp"
+            app:nb_textSize="16sp"/>
+        <com.ornach.nobobutton.NoboButton
+            android:id="@+id/btn_forgot_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:nb_radius="25dp"
+            android:onClick="btn_forgot_password"
+            app:nb_backgroundColor="@android:color/transparent"
+            app:nb_text="Esqueceu a senha?"
+            android:layout_marginTop="20dp"
+            app:nb_textSize="14sp"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>
