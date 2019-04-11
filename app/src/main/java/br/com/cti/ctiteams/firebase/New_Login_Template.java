@@ -7,7 +7,7 @@ import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -135,7 +135,8 @@ public class New_Login_Template extends AppCompatActivity implements View.OnClic
             }
     }
     public void btn_fb(View View) {
-        signInFacebook();
+        //signInFacebook();
+         startActivity(new Intent(this, NavigationMapasActivity.class));
     }
 
     public void btn_google(View View) {
