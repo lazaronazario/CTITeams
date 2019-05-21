@@ -37,7 +37,7 @@ public class Util {
 
         if (resposta.contains("least 6 characters")){
 
-            Toast.makeText(context,"Digite uma senha maior que 5 characters",Toast.LENGTH_LONG).show();
+            Toast.makeText(context,"Digite uma senha maior que 5 caracteres",Toast.LENGTH_LONG).show();
 
         }
         else if(resposta.contains("address is badly")){

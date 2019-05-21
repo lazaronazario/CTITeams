@@ -7,7 +7,7 @@
     <color name="colorBranco">#fff</color>
     <color name="backgroundColor">#F5f5f5</color>
     <color name="tabColorfocus">#08f94c</color>
-    <color name="tabColorActive">#03791c</color>
+    <color name="tabColorActive">#08f94c</color>
     <color name="tabColorNormal">#FFF</color>
     <color name="tabTextColorActive">#FFF</color>
     <color name="tabTextColorNormal">#666</color>

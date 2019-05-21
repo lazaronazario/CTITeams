@@ -21,12 +21,13 @@
         app:layout_editor_absoluteX="0dp"
         app:layout_editor_absoluteY="0dp"
         >
+
         <ImageView
-            android:layout_width="250dp"
-            android:layout_height="170dp"
-            android:background="@drawable/header_background"
-            android:scaleType="centerCrop"
-            android:layout_gravity="center"/>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="@drawable/fluxo"
+            android:scaleType="centerCrop" />
     </FrameLayout>
 
     <FrameLayout
@@ -89,7 +90,7 @@
                 android:layout_weight="1"
                 android:onClick="onClick"
                 app:nb_backgroundColor="@color/tabColorNormal"
-                app:nb_focusColor="#08f94c"
+                app:nb_focusColor="@color/tabColorfocus"
                 app:nb_radius="30dp"
                 app:nb_text="Cadastrar"
                 app:nb_textColor="@color/tabTextColorNormal"

@@ -1,5 +1,6 @@
 package br.com.cti.ctiteams.firebase;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.design.widget.NavigationView;
@@ -11,10 +12,18 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.facebook.login.LoginManager;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.firebase.auth.FirebaseAuth;
+
 import br.com.cti.ctiteams.R;
 
 public class NavigationMapasActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private GoogleSignInClient googleSignInClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,8 +32,8 @@ public class NavigationMapasActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -33,7 +42,7 @@ public class NavigationMapasActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        MapaTeste Mapas = new MapaTeste();
+        MapaFragment Mapas = new MapaFragment();
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction().replace(R.id.mainLayout, Mapas).commit();
     }
@@ -82,9 +91,29 @@ public class NavigationMapasActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_manage) {
 
+            getSupportFragmentManager().beginTransaction().replace(R.id.mainLayout, new CopFragment()).commit();
+
         } else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_logout) {
+
+            FirebaseAuth.getInstance().signOut();
+
+            LoginManager.getInstance().logOut();
+
+            GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .requestIdToken(getString(R.string.default_web_client_id))
+                    .requestEmail()
+                    .build();
+
+            googleSignInClient = GoogleSignIn.getClient(this, gso);
+            googleSignInClient.signOut();
+
+
+
+            finish();
+
+            startActivity(new Intent(getBaseContext(),New_Login_Template.class));
 
         }
 

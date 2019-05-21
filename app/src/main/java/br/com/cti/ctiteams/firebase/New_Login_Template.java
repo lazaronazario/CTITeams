@@ -13,6 +13,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -58,10 +59,7 @@ public class New_Login_Template extends AppCompatActivity implements View.OnClic
     private GoogleSignInClient googleSignInClient;
     private CallbackManager callbackManager;
     private FirebaseAuth.AuthStateListener authStateListener;
-    private Button button_Deslogar;//não implementado
-    private String[] permissoes = new String[]{
-            Manifest.permission.ACCESS_FINE_LOCATION
-    };
+    private String[] permissoes = new String[]{Manifest.permission.ACCESS_FINE_LOCATION};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +89,10 @@ public class New_Login_Template extends AppCompatActivity implements View.OnClic
 
         //ValidarPermissão
         Permissoes.validarPermissoes(permissoes, this, 1);
+
+        //esconde action bar
+        getSupportActionBar().hide();
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
     }
 
@@ -135,10 +137,8 @@ public class New_Login_Template extends AppCompatActivity implements View.OnClic
             }
     }
     public void btn_fb(View View) {
-        //signInFacebook();
-         startActivity(new Intent(this, NavigationMapasActivity.class));
+        signInFacebook();
     }
-
     public void btn_google(View View) {
         signInGoogle();
     }
@@ -147,30 +147,12 @@ public class New_Login_Template extends AppCompatActivity implements View.OnClic
     }
     public void btn_forgot_password(View View){
         recuperaSenha();
-
     }
-
     public void btn_cadastro(View View){
-        //cadastrar();
-
-        FirebaseAuth.getInstance().signOut();
-
-        LoginManager.getInstance().logOut();
-
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-
-        googleSignInClient = GoogleSignIn.getClient(this, gso);
-        googleSignInClient.signOut();
-
-
-
-        finish();
-
-        startActivity(new Intent(getBaseContext(),New_Login_Template.class));
+        cadastrar();
     }
+
+
     private void showRegisterView(){
         tabSignin.setBackgroundColor(ContextCompat.getColor(this,R.color.tabColorNormal));
         tabSignin.setTextColor(ContextCompat.getColor(this,R.color.tabTextColorNormal));
@@ -247,20 +229,14 @@ public class New_Login_Template extends AppCompatActivity implements View.OnClic
                 if (user!=null){
 
                     Toast.makeText(getBaseContext(),"Usuario "+ user.getEmail() + " está logado" , Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(getBaseContext(),MapsActivity.class));
+                    startActivity(new Intent(getBaseContext(),NavigationMapasActivity.class));
                 }else{
 
                   // startActivity(new Intent(getBaseContext(),New_Login_Template.class));
                   //  finish();
-
                 }
-
-
             }
         };
-
-
-
     }
 
     //------------------------------------------METODOS DE LOGIN---------------------------------------------------------------
@@ -268,7 +244,6 @@ public class New_Login_Template extends AppCompatActivity implements View.OnClic
     private void signInFacebook(){
 
         LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile","email"));
-
 
     }
 
@@ -285,15 +260,11 @@ public class New_Login_Template extends AppCompatActivity implements View.OnClic
 
             //já existe alem conectado pelo google
             Toast.makeText(getBaseContext(),"Já logado",Toast.LENGTH_LONG).show();
-            startActivity(new Intent(getBaseContext(),MapsActivity.class));
-
+            startActivity(new Intent(getBaseContext(),NavigationMapasActivity.class));
             //  googleSignInClient.signOut();
 
-
         }
-
     }
-
 
     private void signInEmail(){
 
@@ -308,7 +279,7 @@ public class New_Login_Template extends AppCompatActivity implements View.OnClic
         }else{
 
             finish();
-            startActivity(new Intent(this, MapsActivity.class));
+            startActivity(new Intent(this, NavigationMapasActivity.class));
 
         }
 
@@ -320,10 +291,7 @@ public class New_Login_Template extends AppCompatActivity implements View.OnClic
 
     }
 
-
-
     //---------------------------------------AUTENTICACAO NO FIREBASE---------------------------------------------------------------
-
 
     private void adicionarContaFacebookaoFirebase(AccessToken token) {
 
@@ -336,7 +304,7 @@ public class New_Login_Template extends AppCompatActivity implements View.OnClic
                         if (task.isSuccessful()) {
 
                             finish();
-                            startActivity(new Intent(getBaseContext(),MapsActivity.class));
+                            startActivity(new Intent(getBaseContext(),NavigationMapasActivity.class));
 
 
                         } else {
@@ -364,7 +332,7 @@ public class New_Login_Template extends AppCompatActivity implements View.OnClic
                         if (task.isSuccessful()) {
 
                             finish();
-                            startActivity(new Intent(getBaseContext(),MapsActivity.class));
+                            startActivity(new Intent(getBaseContext(),NavigationMapasActivity.class));
 
                         } else {
 
@@ -378,7 +346,6 @@ public class New_Login_Template extends AppCompatActivity implements View.OnClic
                     }
                 });
     }
-
 
     private void acessarContaAnonimaaoFirebase(){
 
@@ -389,7 +356,7 @@ public class New_Login_Template extends AppCompatActivity implements View.OnClic
                         if (task.isSuccessful()) {
 
                             finish();
-                            startActivity(new Intent(getBaseContext(),MapsActivity.class));
+                            startActivity(new Intent(getBaseContext(),NavigationMapasActivity.class));
 
                         } else {
 
@@ -406,10 +373,6 @@ public class New_Login_Template extends AppCompatActivity implements View.OnClic
 
 
     }
-
-
-
-
 
     //-------------------------------METODOS DA ACTIVITY--------------------------------------------------------------------------
 
@@ -453,8 +416,7 @@ public class New_Login_Template extends AppCompatActivity implements View.OnClic
 
     }
 
-    //-------Métodos de login com email e recuperação de senha
-
+    //-------MÉTODOS DE LOGIN COM EMAIL E RECUPERAÇÃO DE SENHA
 
     private void recuperaSenha(){
         String email = edtxtemail.getText().toString().trim();
@@ -468,6 +430,7 @@ public class New_Login_Template extends AppCompatActivity implements View.OnClic
         }
 
     }
+
     private void enviarEmail(String email){
         auth.sendPasswordResetEmail(email).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
@@ -487,9 +450,12 @@ public class New_Login_Template extends AppCompatActivity implements View.OnClic
         String email = edtxtemail.getText().toString().trim();
         String senha = edttxtsenha.getText().toString().trim();
 
-        if (email.isEmpty() || senha.isEmpty()){
-
-            Toast.makeText(getBaseContext(), "Insira os campos obrigatórios", Toast.LENGTH_LONG).show();
+        if (email.isEmpty() && senha.isEmpty()) {
+            Toast.makeText(getBaseContext(), "Favor preencher os campos obrigatórios", Toast.LENGTH_LONG).show();
+        }else if (email.isEmpty()){
+            Toast.makeText(getBaseContext(), "Campo e-mail obrigatório", Toast.LENGTH_LONG).show();
+        }else if (senha.isEmpty()){
+            Toast.makeText(getBaseContext(), "Campo senha obrigatório", Toast.LENGTH_LONG).show();
         }else{
             if(Util.verificarInternet(this)) {
 
@@ -508,7 +474,7 @@ public class New_Login_Template extends AppCompatActivity implements View.OnClic
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    startActivity(new Intent(getBaseContext(), MapsActivity.class));
+                    startActivity(new Intent(getBaseContext(), NavigationMapasActivity.class));
                     Toast.makeText(getBaseContext(), "Usuário logado com sucesso", Toast.LENGTH_LONG).show();
                     finish();
                 } else{
@@ -520,16 +486,25 @@ public class New_Login_Template extends AppCompatActivity implements View.OnClic
         });
     }
 
-    //------- Fim Métodos de login com email e recuperação de senha
+    //------- MÉTODOS DO CADASTRAR
 
-    //-------- métodos cadastrar
     private void cadastrar() {
         String email = edittextemailcadastro.getText().toString().trim();
         String senha = edittextsenhacadastro.getText().toString().trim();
         String confirmaSenha = edtxtrepetesenha.getText().toString().trim();
 
-        if (email.isEmpty() || senha.isEmpty() || confirmaSenha.isEmpty()){
-            Toast.makeText(getBaseContext(), "Favor preencher os campos", Toast.LENGTH_LONG).show();
+        if (email.isEmpty() && senha.isEmpty() && confirmaSenha.isEmpty()) {
+            Toast.makeText(getBaseContext(), "Favor preencher os campos obrigatórios", Toast.LENGTH_LONG).show();
+
+        }else if (email.isEmpty()){
+            Toast.makeText(getBaseContext(), "Favor preencher o campo e-mail", Toast.LENGTH_LONG).show();
+
+        }else if (senha.isEmpty()){
+            Toast.makeText(getBaseContext(), "Favor preencher o campo senha", Toast.LENGTH_LONG).show();
+
+        }else if (confirmaSenha.isEmpty()){
+            Toast.makeText(getBaseContext(), "Favor preencher o campo Repetir senha", Toast.LENGTH_LONG).show();
+
         }else {
 
             if (senha.contentEquals(confirmaSenha)) {
@@ -546,6 +521,7 @@ public class New_Login_Template extends AppCompatActivity implements View.OnClic
             }
         }
     }
+
     private void criarUsuario(String email, String senha){
         //auth = FirebaseAuth.getInstance();
         auth.createUserWithEmailAndPassword(email, senha).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -574,7 +550,8 @@ public class New_Login_Template extends AppCompatActivity implements View.OnClic
         }
 
     }
-    //--------- fim métodos cadastrar
+
+    //--------- FIM MÉTODO CADASTRAR
 
     @Override
     protected void onStop() {

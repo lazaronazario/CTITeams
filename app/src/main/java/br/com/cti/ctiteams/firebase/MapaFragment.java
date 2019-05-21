@@ -7,25 +7,19 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -33,36 +27,45 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import br.com.cti.ctiteams.R;
 
-public class MapsActivity extends AppCompatActivity
-        implements OnMapReadyCallback {
+import static android.content.Context.LOCATION_SERVICE;
+
+public class MapaFragment extends Fragment implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private FirebaseAuth autenticacao;
     private LocationManager locationManager;
     private LocationListener locationListener;
+    View mapView;
+
+    public MapaFragment() {
+        // Required empty public constructor
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View v= inflater.inflate(R.layout.fragment_map2,container, false);
 
-        //Configurações iniciais
-        // autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
-
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
-
+        return v;
 
     }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        SupportMapFragment mapFragment = (SupportMapFragment)
+                getChildFragmentManager().findFragmentById(R.id.map1);
+        mapFragment.getMapAsync(this);
+    }
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
         mMap.setMyLocationEnabled(true);
-        googleMap.getUiSettings().setZoomControlsEnabled(true);
+
+        //googleMap.getUiSettings().setZoomControlsEnabled(true);
         //Recuperar localizacao do usuário
         recuperarLocalizacaoUsuario();
 
@@ -70,7 +73,7 @@ public class MapsActivity extends AppCompatActivity
 
     private void recuperarLocalizacaoUsuario() {
 
-        locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        LocationManager locationManager = (LocationManager)getActivity().getSystemService(Context.LOCATION_SERVICE);
 
         locationListener = new LocationListener() {
             @Override
@@ -87,7 +90,7 @@ public class MapsActivity extends AppCompatActivity
                                 .position(meuLocal)
                                 .title("Meu Local")
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.usuario))
-                                //.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+                        //.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
                 );
                 mMap.moveCamera(
                         CameraUpdateFactory.newLatLngZoom(meuLocal, 16)
@@ -112,7 +115,7 @@ public class MapsActivity extends AppCompatActivity
         };
 
         //Solicitar atualizações de localização
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ) {
+        if (ActivityCompat.checkSelfPermission(this.getActivity() , Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ) {
             locationManager.requestLocationUpdates(
                     LocationManager.GPS_PROVIDER,
                     2000,
@@ -122,6 +125,4 @@ public class MapsActivity extends AppCompatActivity
         }
 
     }
-
-
 }

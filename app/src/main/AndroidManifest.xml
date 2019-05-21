@@ -41,9 +41,6 @@
 
         <activity android:name=".firebase.New_Login_Template" />
         <activity
-            android:name=".firebase.MapsActivity"
-            android:label="@string/title_activity_maps" />
-        <activity
             android:name=".firebase.NavigationMapasActivity"
             android:label="@string/title_activity_navigation_mpas"
             android:theme="@style/AppTheme.NoActionBar"></activity>

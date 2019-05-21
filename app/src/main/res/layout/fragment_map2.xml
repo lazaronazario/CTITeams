@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".firebase.MapaTeste"
+    tools:context=".firebase.MapaFragment"
     tools:layout_editor_absoluteY="81dp"
     tools:layout_editor_absoluteX="0dp">
 
@@ -15,5 +15,56 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".firebase.MapsActivity" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="16dp"
+        android:background="@color/colorBranco"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+
+        <EditText
+            android:id="@+id/editLocal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/colorBranco"
+            android:drawableLeft="@drawable/circulo_verde"
+            android:drawablePadding="6dp"
+            android:ems="10"
+            android:hint="Meu local"
+            android:inputType="textPersonName"
+            android:textColor="@android:color/darker_gray"
+            android:textColorHint="@android:color/darker_gray"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/editDestino"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/colorBranco"
+            android:drawableLeft="@drawable/circulo_verde"
+            android:drawableTint="@android:color/holo_orange_dark"
+            android:drawablePadding="6dp"
+            android:ems="10"
+            android:hint="Destino"
+            android:inputType="textPersonName"
+            android:textColor="@android:color/darker_gray"
+            android:textColorHint="@android:color/darker_gray"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom"
+        android:text="Vamos lá"
+        android:background="@color/tabColorfocus"/>
+
 
 </FrameLayout>
