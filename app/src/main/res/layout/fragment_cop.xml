@@ -1,12 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".firebase.CopFragment">
 
-    <TextView
+    <Button
+        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Testando fragment"
-        android:textSize="30sp"/>
+        android:text="Fluxo Lento"
+        android:id="@+id/btn_lento"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="sendGetRequest"/>
+
+    <Button
+        android:id="@+id/btn_normal"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/rapido"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginBottom="-99dp"
+        android:onClick="sendGetRequest2"
+        android:text="Fluxo Normal" />
+
+    <Button
+        android:id="@+id/rapido"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="99dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginRight="0dp"
+        android:onClick="sendGetRequest3"
+        android:text="Fluxo Rápido" />
+
+    <TextView
+        android:id="@+id/showOutput"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_lento"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="159dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginRight="0dp"
+        android:text="Resposta..." />
+
+    <EditText
+        android:id="@+id/editIp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rapido"
+        android:layout_alignParentStart="true"
+        android:ems="10"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:inputType="textEmailAddress"
+        android:text="http://192.168.43.88" />
+
 
 </RelativeLayout>

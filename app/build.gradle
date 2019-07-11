@@ -36,6 +36,7 @@ dependencies {
     implementation 'com.ornach.richtext:richtext:1.0'
     implementation 'com.ornach.magicicon:magic-icon:1.6'
     implementation 'com.google.firebase:firebase-core:16.0.6'
+    implementation 'com.google.android.gms:play-services-places:16.0.0'
 
 }
 apply plugin: 'com.google.gms.google-services'

@@ -38,6 +38,8 @@
 
         </LinearLayout>
     </HorizontalScrollView>
+
+
     <LinearLayout
         android:layout_width="150dp"
         android:layout_height="wrap_content"
@@ -63,6 +65,8 @@
             android:background="#BBB"/>
 
     </LinearLayout>
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -130,6 +134,5 @@
             app:nb_textSize="14sp"/>
 
     </LinearLayout>
-
 
 </LinearLayout>
